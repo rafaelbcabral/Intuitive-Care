@@ -1,0 +1,237 @@
+[v-cloak] {
+  display: none;
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #42b983;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Variáveis de cores */
+:root {
+  --cor-primaria: #2c3e50;
+  --cor-secundaria: #42b983;
+  --cor-destaque: #3498db;
+  --cinza-claro: #f5f7fa;
+  --cinza-escuro: #7f8c8d;
+  --branco: #ffffff;
+  --sombra: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transicao: all 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--cinza-claro);
+  color: var(--cor-primaria);
+  line-height: 1.6;
+  padding: 20px;
+}
+
+/* Cabeçalho */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  color: var(--cor-primaria);
+  font-size: 2rem;
+  margin-bottom: 5px;
+}
+
+.subtitulo {
+  color: var(--cinza-escuro);
+  font-size: 1rem;
+}
+
+/* Área de busca */
+.busca-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.busca-container input {
+  flex: 1;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: var(--transicao);
+}
+
+.busca-container input:focus {
+  outline: none;
+  border-color: var(--cor-destaque);
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.busca-container button {
+  padding: 12px 20px;
+  background-color: var(--cor-secundaria);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: var(--transicao);
+}
+
+.busca-container button:hover {
+  background-color: #3aa76d;
+}
+
+/* Mensagens */
+.mensagem-erro, .sem-resultados {
+  padding: 15px;
+  text-align: center;
+  margin: 20px auto;
+  max-width: 800px;
+  border-radius: 4px;
+}
+
+.mensagem-erro {
+  background-color: #ffecec;
+  color: #e74c3c;
+}
+
+.sem-resultados {
+  background-color: #f8f9fa;
+  color: var(--cinza-escuro);
+}
+
+/* Tabela de resultados */
+.resultados-container {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 30px auto;
+}
+
+.tabela-wrapper {
+  background-color: var(--branco);
+  border-radius: 8px;
+  box-shadow: var(--sombra);
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: var(--cor-primaria);
+  color: var(--branco);
+  padding: 15px;
+  text-align: left;
+}
+
+td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+}
+
+tr:hover {
+  background-color: rgba(66, 185, 131, 0.1);
+}
+
+/* Paginação */
+.paginacao {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.paginacao button {
+  padding: 8px 12px;
+  min-width: 40px;
+  background-color: var(--branco);
+  color: var(--cor-primaria);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: var(--transicao);
+}
+
+.paginacao button:hover:not(:disabled) {
+  background-color: var(--cinza-claro);
+}
+
+.paginacao button.ativo {
+  background-color: var(--cor-secundaria);
+  color: var(--branco);
+  border-color: var(--cor-secundaria);
+}
+
+.paginacao button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Animações */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.2s ease-in;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(10px);
+  opacity: 0;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  body {
+      padding: 15px;
+  }
+  
+  .busca-container {
+      flex-direction: column;
+  }
+  
+  th, td {
+      padding: 10px 12px;
+      font-size: 0.9rem;
+  }
+  
+  .paginacao button {
+      padding: 6px 10px;
+      min-width: 35px;
+  }
+}

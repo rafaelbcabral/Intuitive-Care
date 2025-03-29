@@ -1,0 +1,138 @@
+{
+	"info": {
+		"_postman_id": "2bb20585-e075-49c4-aa51-d4270db60d67",
+		"name": "OperadorasSaude_API",
+		"description": "Teste Técnico - Coleção Postman API Operadoras\n\nMensagem:  \nSegue em anexo a coleção do Postman para teste da API desenvolvida.  \nInstruções:\n\n``` json\nImporte o arquivo `OperadorasSaudeAPI.postman_collection.json` e \nconfigure a variável `base_url`.\n\n ```\n\n1. Importar no Postman\n    \n2. Definir a variável 'base_url' conforme necessário\n    \n3. Executar os endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30987471"
+	},
+	"item": [
+		{
+			"name": "Busca simples",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/buscar_operadoras?termo=saude",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"buscar_operadoras"
+					],
+					"query": [
+						{
+							"key": "termo",
+							"value": "saude"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busca paginada",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/buscar_operadoras?termo=saude&page=2&per_page=5",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"buscar_operadoras"
+					],
+					"query": [
+						{
+							"key": "termo",
+							"value": "saude"
+						},
+						{
+							"key": "page",
+							"value": "2"
+						},
+						{
+							"key": "per_page",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sem resultados",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/buscar_operadoras?termo=invalido",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"buscar_operadoras"
+					],
+					"query": [
+						{
+							"key": "termo",
+							"value": "invalido"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Erro 404",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/buscar_operadoras\t",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"buscar_operadoras\t"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:5000",
+			"type": "string"
+		}
+	]
+}

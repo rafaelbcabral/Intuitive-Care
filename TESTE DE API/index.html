@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca de Operadoras de Saúde</title>
+    
+    <link rel="icon" href="https://vuejs.org/images/logo.png" type="image/png">
+    <link rel="shortcut icon" href="https://vuejs.org/images/logo.png">
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app" v-cloak>
+
+    <div v-if="isHydrating" class="loader"></div>
+    <div v-else>
+
+      <header>
+        <h1>Busca de Operadoras de Saúde</h1>
+        <p class="subtitulo">Busque por Razão Social, Nome Fantasia, CNPJ ou Registro ANS</p>
+      </header>
+      
+      <main>
+        <div class="busca-container">
+          <input 
+          v-model="termoBusca" 
+          @keyup.enter="buscarOperadoras"
+          placeholder="Digite sua busca..."
+          />
+          <button @click="buscarOperadoras">
+            <span v-if="!carregando">Buscar</span>
+            <span v-else>Buscando...</span>
+          </button>
+        </div>
+        
+        <transition name="fade">
+          <div v-if="erro" class="mensagem-erro">
+            {{ erro }}
+          </div>
+        </transition>
+        
+        <transition name="slide-fade">
+          <div v-if="resultados.length > 0" class="resultados-container">
+            <h2>Resultados ({{ totalResultados }})</h2>
+            
+            <div class="tabela-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Razão Social</th>
+                    <th>Nome Fantasia</th>
+                    <th>CNPJ</th>
+                    <th>Registro ANS</th>
+                    <th>Relevância</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(item, index) in resultados" :key="index">
+                    <td>{{ item.Razao_Social }}</td>
+                    <td>{{ item.Nome_Fantasia }}</td>
+                    <td>{{ item.CNPJ }}</td>
+                    <td>{{ item.Registro_ANS }}</td>
+                    <td>{{ item.Relevancia }}%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <div class="paginacao">
+              <button @click="mudarPagina(paginaAtual - 1)" :disabled="paginaAtual === 1">
+                Anterior
+              </button>
+              
+              <button 
+              v-for="pagina in paginasVisiveis" 
+              :key="pagina"
+              @click="mudarPagina(pagina)"
+              :class="{ ativo: pagina === paginaAtual }"
+              >
+              {{ pagina }}
+            </button>
+            
+            <button @click="mudarPagina(paginaAtual + 1)" :disabled="paginaAtual === totalPaginas">
+              Próximo
+            </button>
+          </div>
+        </div>
+      </transition>
+      
+      <transition name="fade">
+        <div v-if="termoBusca && !carregando && resultados.length === 0" class="sem-resultados">
+          Nenhum resultado encontrado para "{{ termoBusca }}"
+        </div>
+      </transition>
+    </main>
+  </div>
+</div>
+  
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
